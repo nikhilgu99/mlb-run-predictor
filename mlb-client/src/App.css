@@ -1,0 +1,32 @@
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.matchup-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.card {
+  border: 1px solid #444;
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  text-align: left;
+}
+
+.high-prob { color: #4ade80; } /* Green for > 50% */
+.low-prob { color: #f87171; } /* Red for <= 50% */
+
+#teams {
+  text-align: center;
+}
