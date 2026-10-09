@@ -1,12 +1,13 @@
 import statsapi
 import psycopg2
+import os
 
 # Connect to PostgreSQL
 conn = psycopg2.connect(
     dbname="mlb_db",
     user="mlb_admin",
     password="admin_password",
-    host="localhost",
+    host=os.getenv("DB_HOST", "localhost"),
     port="5432"
 )
 cursor = conn.cursor()

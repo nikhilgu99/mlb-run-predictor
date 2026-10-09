@@ -7,7 +7,7 @@ import java.util.List;
 // A controller to handle web requests and return data as JSON payload
 @RestController
 @RequestMapping("/api/matchups")
-@CrossOrigin(origins = "*") // Allows future React frontend to request data
+@CrossOrigin(origins = "*") // Allows React frontend to request data
 public class MatchupController {
 
     private final MatchupRepository repository;

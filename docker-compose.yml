@@ -1,6 +1,5 @@
-version: '3.8'
 services:
-  postgres:
+  db:
     image: postgres:15
     environment:
       POSTGRES_USER: mlb_admin
@@ -10,6 +9,35 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: 
+      context: ./mlb-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mlb_db
+      - SPRING_DATASOURCE_USERNAME=mlb_admin
+      - SPRING_DATASOURCE_PASSWORD=admin_password
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./mlb-client
+    ports:
+      - "5173:80" # Maps local Vite port to the Nginx container port
+    depends_on:
+      - api
+
+  data-worker:
+    build:
+      context: .
+    environment:
+      - DB_HOST=db
+    command: tail -f /dev/null
+    depends_on:
+      - db
 
 volumes:
   pgdata:
